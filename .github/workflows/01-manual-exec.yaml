@@ -10,11 +10,9 @@ name: 'Execução Manual'
 on:
   workflow_dispatch:
 
-
 # trabalhos/tarefas dentro do pipeline = jobs
 jobs:
   e2e-tests:
-
     #maquina que o job vai executar
     runs-on: ubuntu-latest
 
@@ -35,12 +33,11 @@ jobs:
       # instalação das depedencias
       - name: Instalando dependencias
         run: yarn
-      
+
       # instalação do playright
       - name: Instalando playwright
         run: yarn playwright install
 
       # executar os testes e2e
-      - name: Executando Testes E2E 
+      - name: Executando Testes E2E
         run: yarn run e2e
-
