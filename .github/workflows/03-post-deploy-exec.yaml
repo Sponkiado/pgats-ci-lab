@@ -1,45 +1,47 @@
-# CI de Nível 03 - Disparo após a conclusão de um pipeline
-# nome do nosso 'pipeline'
+# CI de Nível 01 - Disparo manual a partir de 1 clique
 
+# Nome do nosso 'pipeline'
 name: 'Execução por Deploy'
 
-# regras de disparo (gatilhos/triggers)
-# gatilho de exec manual = workflow_dispatch
-
-on:
+# Regras de disparo (gatilho/triggers)
+# Gatilho de exec a partir de um outro pipe = workflow_run
+on: 
   workflow_run:
-    workflow: ['Execução Manual']
-      types:
-        - completed
+    workflows: ['Execução Manual']
+    types:
+      - completed
 
-# trabalhos/tarefas dentro do pipeline = jobs
+# Trabalhos/tarefas dentro do pipeline = jobs
 jobs:
   e2e-tests:
-    #maquina que o job vai executar
+
+    # Máquina que o job vai executar
     runs-on: ubuntu-latest
 
-    # passos do script de build
+    # Passos do script de build
     steps:
-      # clone do projeto
-      - uses: actions/checkout@v4
+    # Clone do projeto
+    - name: Clonar projeto
+      uses: actions/checkout@v4
 
-      # instalação do node
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
+    # Instalação do NodeJs
+    - name: Instalar NodeJs
+      uses: actions/setup-node@v3
+      with:
+        node-version: 22.x
 
-      # instalação do Yarn
-      - name: Instalando Yarn
-        run: npm install -g yarn
+    # Instalação do Yarn
+    - name: Instalar Yarn
+      run: npm install -g yarn
 
-      # instalação das depedencias
-      - name: Instalando dependencias
-        run: yarn
+    # Instalação das dependências
+    - name: Instalar dependências
+      run: yarn
 
-      # instalação do playright
-      - name: Instalando playwright
-        run: yarn playwright install
+    # Instalação do Playwright
+    - name: Instalar Playwright
+      run: yarn playwright install
 
-      # executar os testes e2e
-      - name: Executando Testes E2E
-        run: yarn run e2e
+    # Executar os testes e2e
+    - name: Executar Testes E2E
+      run: yarn run e2e
