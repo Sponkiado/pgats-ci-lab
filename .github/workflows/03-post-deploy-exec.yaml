@@ -16,7 +16,7 @@ jobs:
   e2e-tests:
     # Máquina que o job vai executar
     runs-on: ubuntu-latest
-    
+
     # condicional - if
     # '${ expressao }'
     # == comparação
