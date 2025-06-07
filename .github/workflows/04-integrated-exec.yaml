@@ -71,7 +71,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Deploy simulation
-        run: echo 'Deploy application'
+      - uses: actions/checkout@v4
+      - name: Simulação do Deploy
+        run: echo "simulando o deploy com sucesso"
